@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     # Amazon ML Challenge 2026: Business Entity Resolution
 
     [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -224,3 +225,7 @@
 
     ## 📄 License
     This repository and all included source code are licensed under the [Apache 2.0 License](LICENSE) and [MIT License](LICENSE).
+=======
+# ML-Challenge-26
+Developed a machine learning pipeline for product matching and entity resolution, leveraging candidate generation, feature engineering, and ensemble models such as XGBoost, LightGBM, and CatBoost.
+>>>>>>> 5f292b5c5932e199c742e80cc5f4599b5ad38e16
