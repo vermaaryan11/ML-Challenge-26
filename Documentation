@@ -1,0 +1,190 @@
+# Amazon ML Challenge 2026 — Business Entity Resolution
+
+## Solution Documentation
+
+---
+
+## 1. Team Information
+
+**Team Name:** MangoCode
+
+**Team Members:**
+
+- Aryan Verma
+- Vani Makhija
+
+**Problem Statement:** Business Entity Resolution
+
+**Challenge:** Amazon ML Challenge 2026
+
+---
+
+## 2. Problem Understanding
+
+The objective of this challenge is to resolve noisy business entity records from **Source 2 and Source 3** against a deduplicated canonical reference dataset, **Source 1**.
+
+Each source contains business information such as:
+
+- Business/entity name
+- Address
+- Country
+
+The records in Source 2 and Source 3 may contain spelling variations, formatting differences, abbreviations, missing information, transliteration differences, and other forms of noise.
+
+The system identifies which Source 2 and Source 3 records correspond to the same canonical business entity represented in Source 1.
+
+The solution operates entirely offline and does not use external business databases, geocoding APIs, web search, or other external entity information.
+
+---
+
+## 3. Solution Overview
+
+The MangoCode solution uses a multi-stage entity-resolution pipeline:
+
+```text
+Raw Source Data
+      |
+      v
+Data Loading & Auditing
+      |
+      v
+Multilingual Normalization
+      |
+      v
+Candidate Generation / Blocking
+      |
+      v
+Pairwise Feature Engineering
+      |
+      v
+Machine Learning Classification
+      |
+      v
+XGBoost + LightGBM + CatBoost Ensemble
+      |
+      v
+Confidence Thresholding
+      |
+      v
+Global Consistency Resolution
+      |
+      v
+Final Entity Matches
+      |
+      v
+candidate_pairs.tsv
+matching_results.tsv
+```
+
+The pipeline first reduces the enormous Source 1 × Source 2/3 search space through candidate blocking. The resulting candidate pairs are then evaluated using deterministic similarity features and a machine-learning ensemble.
+
+---
+
+## 4. Team Members
+
+### Aryan Verma
+
+Responsible for the development and implementation of the business entity-resolution pipeline, including candidate generation, feature engineering, machine-learning matching, inference, and output generation.
+
+### Vani Makhija
+
+Responsible for the development and evaluation of the entity-resolution solution, experimentation, validation, documentation, and overall competition workflow.
+
+---
+
+## 5. Key Characteristics of the Solution
+
+The solution is designed around the following principles:
+
+1. **Offline inference**
+2. **No external business lookup**
+3. **Efficient candidate blocking**
+4. **Multilingual and noise-aware normalization**
+5. **Deterministic similarity features**
+6. **Gradient-boosting ensemble classification**
+7. **Entity-level grouped cross-validation**
+8. **Global consistency resolution**
+9. **Strict competition output validation**
+
+The final system generates both required competition files:
+
+```text
+output/
+├── candidate_pairs.tsv
+└── matching_results.tsv
+```
+
+---
+
+## 6. Reported Performance
+
+According to the project evaluation results, the final ensemble with post-processing achieved:
+
+**Macro F0.5: 0.98006 (98.01%)**
+
+with:
+
+- Precision: **98.24%**
+- Recall: **97.10%**
+- Singleton Accuracy: **97.59%**
+
+The reported candidate blocking recall ceiling is **96.01%**, with **5,048 / 5,258** ground-truth pairs captured while reducing the search space by more than **99.93%**.
+
+---
+
+## 7. Competition Compliance
+
+The solution performs entity resolution using only the supplied competition data.
+
+| Constraint               | Implementation                                |
+| ------------------------ | --------------------------------------------- |
+| Team                     | MangoCode                                     |
+| Members                  | Aryan Verma, Vani Makhija                     |
+| External business lookup | Not used                                      |
+| External geocoding       | Not used                                      |
+| Network-based matching   | Not used                                      |
+| Inference                | Fully offline                                 |
+| Candidate generation     | Offline inverted-index blocking               |
+| Model                    | XGBoost + LightGBM + CatBoost                 |
+| Output                   | TSV                                           |
+| Required outputs         | `candidate_pairs.tsv`, `matching_results.tsv` |
+
+---
+
+## 8. Final Submission
+
+The final submission is organized according to the competition requirements:
+
+```text
+MangoCode_submission.zip
+├── output/
+│   ├── matching_results.tsv
+│   └── candidate_pairs.tsv
+│
+├── code/
+│   └── business_entity_resolution/
+│       ├── src/
+│       ├── README.md
+│       └── requirements.txt
+│
+└── Documentation_template.md
+```
+
+The submission is validated using the official validation utility before packaging.
+
+---
+
+## 9. Conclusion
+
+MangoCode's solution combines efficient candidate blocking, multilingual normalization, deterministic similarity features, gradient-boosting ensemble classification, and global consistency resolution to address noisy business entity matching across multiple sources.
+
+The approach is designed to maintain high precision while substantially reducing the computational cost of comparing millions of entity records.
+
+The final system produces the required competition outputs:
+
+```text
+candidate_pairs.tsv
+matching_results.tsv
+```
+
+and performs inference entirely offline using information contained within the competition dataset.

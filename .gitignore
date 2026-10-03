@@ -1,23 +1,24 @@
-# Dataset files (large files > 1 GB)
-student_resource/dataset/
-dataset/
-*.tsv.gz
-*.tar.gz
-*.zip
+# Virtual environment
+.venv/
+venv/
+env/
 
-# OS and Cache files
-.DS_Store
-__MACOSX/
+# Python cache
 __pycache__/
 *.py[cod]
-*$py.class
 .ipynb_checkpoints/
-*.log
+
+# IDE
+.vscode/
+.idea/
+
+# CatBoost logs
 catboost_info/
 
+# Environment variables
+.env
+.env.*
 
-# Git LFS or large outputs (>100MB)
-output/candidate_pairs.tsv
-student_resource/output/candidate_pairs.tsv
-matching_results*.tsv
-*copy.tsv
+# OS files
+.DS_Store
+Thumbs.db
